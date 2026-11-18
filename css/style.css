@@ -5,6 +5,8 @@
   --color-card-bg: #fcfcfc;
   --color-intro-bg: #ebebeb;
   --color-text: #000;
+  --color-text-muted: #5c5c5c;
+  --color-focus: var(--color-accent);
 
   --font-family: "Open Sans", sans-serif;
   --font-family-heading: "Josefin Sans", sans-serif;
@@ -43,13 +45,13 @@ figure {
 
 img {
   display: block;
-  max-width: 100%;
-  height: auto;
+  max-inline-size: 100%;
+  block-size: auto;
 }
 
 /* Base */
 body {
-  min-height: 100vh;
+  min-block-size: 100svh;
   padding-block-end: var(--space-xl);
   font-family: var(--font-family);
   font-size: var(--font-size-body);
@@ -59,6 +61,16 @@ body {
   background-color: var(--color-page-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 /* Skip link */
@@ -80,15 +92,15 @@ body {
 
 /* Recipe card */
 .recipe {
-  max-width: var(--content-max-width);
+  max-inline-size: var(--content-max-width);
   margin-inline: auto;
   background-color: var(--color-card-bg);
 }
 
 .recipe-hero {
-  width: 100%;
+  inline-size: 100%;
   aspect-ratio: 16 / 9;
-  max-height: var(--hero-max-height);
+  max-block-size: var(--hero-max-height);
   object-fit: cover;
 }
 
@@ -154,12 +166,29 @@ body {
   line-height: var(--line-height-list);
 }
 
-.recipe-list--ingredients {
+.recipe-list[data-variant="ingredients"] {
   list-style: none;
   padding-inline-start: 0;
 }
 
-.recipe-list--steps {
+.recipe-list[data-variant="ingredients"] li:has(:checked) {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.recipe-list[data-variant="ingredients"] input {
+  accent-color: var(--color-accent);
+}
+
+.recipe-list[data-variant="ingredients"] label {
+  cursor: pointer;
+}
+
+.recipe-list[data-variant="ingredients"] label:hover {
+  color: var(--color-accent);
+}
+
+.recipe-list[data-variant="steps"] {
   padding-inline-start: 1.375rem;
 }
 
@@ -174,7 +203,7 @@ body {
 }
 
 .recipe-gallery-image {
-  width: 100%;
+  inline-size: 100%;
   aspect-ratio: 5 / 4;
   object-fit: cover;
 }
