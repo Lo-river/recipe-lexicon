@@ -21,7 +21,6 @@
   --space-xl: 4rem;
 
   --content-max-width: 80rem;
-  --hero-max-height: 500px;
 }
 
 /* Reset - based on Kevin Powells minimal reset: https://codepen.io/kevinpowell/pen/QWxBgZX */
@@ -92,23 +91,19 @@ a:hover {
 
 /* Recipe card */
 .recipe {
+  display: grid;
+  gap: var(--space-m);
   max-inline-size: var(--content-max-width);
   margin-inline: auto;
+  padding-block: var(--space-l) var(--space-xl);
+  padding-inline: var(--space-s);
   background-color: var(--color-card-bg);
 }
 
 .recipe-hero {
   inline-size: 100%;
   aspect-ratio: 16 / 9;
-  max-block-size: var(--hero-max-height);
   object-fit: cover;
-}
-
-.recipe-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-  padding: var(--space-l) var(--space-s) var(--space-xl);
 }
 
 /* Header */
@@ -214,9 +209,35 @@ a:hover {
 }
 
 /* Desktop */
-@media (min-width: 48em) {
-  .recipe-content {
+@media (width >= 48em) {
+  .recipe {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "hero        header"
+      "ingredients steps"
+      "serving     serving";
+    gap: var(--space-l);
     padding-inline: var(--space-l);
+  }
+
+  .recipe-hero {
+    grid-area: hero;
+  }
+
+  .recipe-header {
+    grid-area: header;
+  }
+
+  .recipe-ingredients {
+    grid-area: ingredients;
+  }
+
+  .recipe-steps {
+    grid-area: steps;
+  }
+
+  .recipe-serving {
+    grid-area: serving;
   }
 
   .recipe-gallery {
