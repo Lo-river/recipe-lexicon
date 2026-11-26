@@ -18,4 +18,6 @@ dist/
 # Logs
 *.log
 
-
+# Test files
+test-photos/
+css/test-footer/

@@ -1,11 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receptboken</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receptboken</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Hoppa till innehållet</a>
+
+    <header class="site-header">
+      <a class="site-logo" href="index.html"
+        ><img
+          src="logotype/logo-hemlagat-transparent.svg"
+          alt="Hemlagat, till startsidan"
+      /></a>
+      <nav aria-label="Huvudmeny">
+        <ul role="list" class="site-nav">
+          <li><a href="index.html">Recept</a></li>
+          <li><a href="#">Om sajten</a></li>
+          <li><a class="button" href="#">Dela recept</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="home">
+      <header class="recipe-header">
+        <img
+          src="test-photos/hero-02-index.avif"
+          class="recipe-hero"
+          alt="fyller på med text när jag lagt in ny bild"
+          width="872"
+          height="580"
+        />
+        <h1 class="recipe-title">Rubrik för receptet</h1>
+        <p class="recipe-intro">Ingress för recept</p>
+      </header>
+      <article class="content">
+        <section class="categories">
+          <nav class="category-list" aria-label="Receptkategorier">
+            <ul role="list" class="test">
+              <li><a href="#">Frukost</a></li>
+              <li><a href="#">Lunch</a></li>
+              <li><a href="#">Middag</a></li>
+              <li><a href="#">Efterrätt</a></li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="test-container">
+          <section class="recipe-header recipe-section recipe-card">
+            <div class="test-hero">
+              <img
+                class="recipe-gallery-image"
+                src="test-photos/recipe-suggestion-03.avif"
+                alt="fyller på med text när jag lagt in ny bild"
+                width="687"
+                height="1032"
+                loading="lazy"
+              />
+              <h2 class="test-hero-text">Frukostrecept</h2>
+            </div>
+          </section>
+          <section class="recipe-header recipe-section recipe-card">
+            <div class="test-hero">
+              <img
+                class="recipe-gallery-image"
+                src="test-photos/recipe-suggestion-01.avif"
+                alt="fyller på med text när jag lagt in ny bild"
+                width="687"
+                height="1032"
+                loading="lazy"
+              />
+              <h2 class="test-hero-text">Lunchrecept</h2>
+            </div>
+          </section>
+          <section class="recipe-header recipe-section recipe-card">
+            <div class="test-hero">
+              <img
+                class="recipe-gallery-image"
+                src="test-photos/recipe-suggestion-02.avif"
+                alt="fyller på med text när jag lagt in ny bild"
+                width="687"
+                height="1032"
+                loading="lazy"
+              />
+              <h2 class="test-hero-text">Dessertrecept</h2>
+            </div>
+          </section>
+          <!-- </div> -->
+        </section>
+      </article>
+    </main>
+
+    <div class="footer-wrapper">
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <a href="index.html"
+            ><img
+              class="footer-logo"
+              src="logotype/logo-hemlagat-transparent-stroke-3.svg"
+              alt="Hemlagat, till startsidan"
+          /></a>
+
+          <p>Enkla vardagsrecept för hela familjen.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Sidfot">
+          <ul role="list">
+            <li><a href="#">Om sajten</a></li>
+          </ul>
+          <h2 class="footer-title">Fler recept</h2>
+          <ul role="list">
+            <li><a href="#">Frukost</a></li>
+            <li><a href="#">Middag</a></li>
+            <li><a href="#">Efterrätt</a></li>
+            <li><a href="#">Fika</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copyright">
+          Bilder: Lånade från Lexicons Figma-mockup · © 2026 Lo River Lööf
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>

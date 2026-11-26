@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enkelt recept på pannkakor</title>
+    <meta
+      name="description"
+      content="Enkelt recept på tunna pannkakor för 4 personer. Klart på 30 minuter och perfekt med sylt och grädde."
+    />
+    <title>Enkelt pannkaksrecept | Hemlagat</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -11,29 +15,41 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Open+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Hoppa till innehållet</a>
+
+    <header class="site-header">
+      <a class="site-logo" href="index.html"
+        ><img
+          src="logotype/logo-hemlagat-transparent.svg"
+          alt="Hemlagat, till startsidan"
+      /></a>
+      <nav aria-label="Huvudmeny">
+        <ul role="list" class="site-nav">
+          <li><a href="index.html">Recept</a></li>
+          <li><a href="#">Om sajten</a></li>
+          <li><a class="button" href="#">Dela recept</a></li>
+        </ul>
+      </nav>
+    </header>
+
     <main id="main">
       <article class="recipe">
-        <img
-          class="recipe-hero"
-          src="images/01-hero.avif"
-          alt="Tunna pannkakor med grädde och färska hallon."
-          width="872"
-          height="580"
-        />
-
         <header class="recipe-header">
+          <img
+            src="images/01-hero.avif"
+            class="recipe-hero"
+            alt="Tunna pannkakor med grädde och färska hallon."
+            width="872"
+            height="580"
+          />
           <h1 class="recipe-title">Enkelt recept på pannkakor</h1>
-
           <p class="recipe-intro">
             Gör traditionella tunna pannkakor med detta enkla och goda
             pannkaksrecept.
           </p>
-
           <dl class="recipe-facts">
             <div class="recipe-fact">
               <dt>Portioner</dt>
@@ -47,13 +63,19 @@
               <dt>Svårighetsgrad</dt>
               <dd class="recipe-fact-value">Lätt</dd>
             </div>
+            <div class="recipe-fact recipe-ratings">
+              <dt>Betyg</dt>
+              <dd class="recipe-fact-value">
+                <span class="recipe-stars" aria-hidden="true">★★★★★</span>
+                4,9 (128 recensioner)
+              </dd>
+            </div>
           </dl>
         </header>
-
         <section class="recipe-section recipe-ingredients">
           <h2 class="recipe-subtitle">Ingredienser</h2>
           <p>För 4 portioner</p>
-          <ul class="recipe-list" data-variant="ingredients">
+          <ul class="recipe-list" data-variant="ingredients" role="list">
             <li>
               <label>
                 <input type="checkbox" />
@@ -142,5 +164,35 @@
         </section>
       </article>
     </main>
+
+    <div class="footer-wrapper">
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <a href="index.html"
+            ><img
+              class="footer-logo"
+              src="logotype/logo-hemlagat-transparent-stroke-3.svg"
+              alt="Hemlagat, till startsidan"
+          /></a>
+
+          <p>Enkla vardagsrecept för hela familjen.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Sidfot">
+          <ul role="list">
+            <li><a href="#">Om sajten</a></li>
+          </ul>
+          <h2 class="footer-title">Fler recept</h2>
+          <ul role="list">
+            <li><a href="#">Frukost</a></li>
+            <li><a href="#">Middag</a></li>
+            <li><a href="#">Efterrätt</a></li>
+            <li><a href="#">Fika</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copyright">
+          Bilder: Lånade från Lexicons Figma-mockup · © 2026 Lo River Lööf
+        </p>
+      </footer>
+    </div>
   </body>
 </html>

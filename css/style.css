@@ -1,231 +1,205 @@
-/* Figma Design Tokens */
+/* ==========================================================
+   1. Tokens
+   light-dark(light value, dark value) follows the visitor's
+   system setting. It only works together with color-scheme.
+   ========================================================== */
 :root {
-  --color-accent: #a10000;
-  --color-page-bg: rgb(161 0 0 / 0.3);
-  --color-card-bg: #fcfcfc;
-  --color-intro-bg: #ebebeb;
-  --color-text: #000;
-  --color-text-muted: #5c5c5c;
-  --color-focus: var(--color-accent);
+  color-scheme: light dark;
 
-  --font-family: "Open Sans", sans-serif;
-  --font-family-heading: "Josefin Sans", sans-serif;
-  --font-size-body: 1rem;
-  --font-size-h1: clamp(2rem, 1rem + 4vw, 4rem);
-  --font-size-h2: 1.5rem;
-  --line-height-list: 2rem;
+  --color-text: light-dark(#1a1a1a, #e8e8ea);
+  --color-text-muted: light-dark(#6b6b6b, #9a9a9f);
+  --color-bg: light-dark(#ffffff, #141518);
+  --color-surface: light-dark(#f5f5f4, #1d1f23);
+  --color-accent: light-dark(#1f5f8b, #7cb8e4);
+  --color-link: light-dark(#1f5f8b, #7cb8e4);
+  --color-link-hover: light-dark(#123d5c, #b3d8f2);
+  --color-border: light-dark(#8c0000, #2c2f35);
+  --color-footer: rgb(224, 209, 209);
 
-  --space-s: 1rem;
-  --space-m: 1.5rem;
-  --space-l: 3rem;
-  --space-xl: 4rem;
+  --font-body: "Open Sans", system-ui, sans-serif;
+  --font-heading: "Josefin Sans", sans-serif;
 
-  --content-max-width: 80rem;
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2rem;
 }
 
-/* Reset - based on Kevin Powells minimal reset: https://codepen.io/kevinpowell/pen/QWxBgZX */
+/* ==========================================================
+   2. Reset
+   Based on Josh Comeau's Custom CSS Reset
+   https://www.joshwcomeau.com/css/custom-css-reset/
+   ========================================================== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-body,
-h1,
-h2,
-p,
-ul,
-ol,
-dl,
-dd,
-figure {
+* {
   margin: 0;
 }
 
-img {
-  display: block;
-  max-inline-size: 100%;
-  block-size: auto;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
 }
 
-/* Base */
 body {
-  min-block-size: 100svh;
-  padding-block-end: var(--space-xl);
-  font-family: var(--font-family);
-  font-size: var(--font-size-body);
-  font-weight: 400;
   line-height: 1.5;
-  color: var(--color-text);
-  background-color: var(--color-page-bg);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Focus */
-:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* From Andy Bell's A (more) Modern CSS Reset
+   https://piccalil.li/blog/a-more-modern-css-reset/
+   Removes list styles only when role="list" is set,
+   so Safari/VoiceOver still announces it as a list. */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+/* ==========================================================
+   3. Base
+   Default styles for plain HTML elements, no classes.
+   ========================================================== */
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: 0.15em;
 }
 
 a:hover {
+  color: var(--color-link-hover);
   text-decoration-thickness: 2px;
 }
 
-/* Skip link */
-.skip-link {
-  position: absolute;
-  inset-block-start: var(--space-s);
-  inset-inline-start: var(--space-s);
-  z-index: 1;
-  padding: var(--space-s);
-  font-weight: 700;
-  color: var(--color-card-bg);
-  background-color: var(--color-accent);
-  transform: translateY(-200%);
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
-.skip-link:focus {
-  transform: translateY(0);
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Recipe card */
+/* ==========================================================
+   4. Layout
+   ========================================================== */
+main {
+  max-inline-size: 70rem;
+  margin-inline: auto;
+  padding: var(--space-m);
+}
+
+/* ==========================================================
+   5. Site header
+   ========================================================== */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-m);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.site-logo img {
+  inline-size: 15rem;
+  block-size: auto;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+/* ==========================================================
+   6. Recipe page
+   ========================================================== */
+
+/* Page grid: one column on mobile, two from 48em */
 .recipe {
   display: grid;
   gap: var(--space-m);
-  max-inline-size: var(--content-max-width);
-  margin-inline: auto;
-  padding-block: var(--space-l) var(--space-xl);
-  padding-inline: var(--space-s);
-  background-color: var(--color-card-bg);
 }
 
-.recipe-hero {
-  inline-size: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-/* Header */
-.recipe-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-}
-
-.recipe-title {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-h1);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-.recipe-intro {
-  padding: var(--space-s);
-  background-color: var(--color-intro-bg);
-}
-
-.recipe-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-s);
-}
-
-.recipe-fact {
-  flex: 1;
-  padding: var(--space-s);
-  text-align: center;
-  background-color: var(--color-intro-bg);
-}
-
-.recipe-fact-value {
-  font-weight: 700;
-}
-
-/* Sections */
-.recipe-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-s);
-}
-
-.recipe-subtitle {
-  font-size: var(--font-size-h2);
-  font-weight: 700;
-}
-
-/* Lists */
-.recipe-list {
-  line-height: var(--line-height-list);
-}
-
-.recipe-list[data-variant="ingredients"] {
-  list-style: none;
-  padding-inline-start: 0;
-}
-
-.recipe-list[data-variant="ingredients"] li:has(:checked) {
-  color: var(--color-text-muted);
-  text-decoration: line-through;
-}
-
-.recipe-list[data-variant="ingredients"] input {
-  accent-color: var(--color-accent);
-}
-
-.recipe-list[data-variant="ingredients"] label {
-  cursor: pointer;
-}
-
-.recipe-list[data-variant="ingredients"] label:hover {
-  color: var(--color-accent);
-}
-
-.recipe-list[data-variant="steps"] {
-  padding-inline-start: 1.375rem;
-}
-
-.recipe-step {
-  padding-inline-start: 0.375rem;
-}
-
-/* Gallery */
-.recipe-gallery {
-  display: grid;
-  gap: var(--space-m);
-}
-
-.recipe-gallery-image {
-  inline-size: 100%;
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
-}
-
-.recipe-caption {
-  padding-block-start: var(--space-s);
-  font-weight: 700;
-}
-
-/* Desktop */
 @media (width >= 48em) {
   .recipe {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     grid-template-areas:
-      "hero        header"
+      "hero        hero"
       "ingredients steps"
       "serving     serving";
-    gap: var(--space-l);
-    padding-inline: var(--space-l);
-  }
-
-  .recipe-hero {
-    grid-area: hero;
+    align-items: start;
   }
 
   .recipe-header {
-    grid-area: header;
+    grid-area: hero;
   }
 
   .recipe-ingredients {
@@ -239,8 +213,218 @@ a:hover {
   .recipe-serving {
     grid-area: serving;
   }
+}
 
-  .recipe-gallery {
-    grid-template-columns: 1fr 1fr;
+/* Hero: image and text share the same grid cells */
+.recipe-header {
+  display: grid;
+  grid-template-columns: var(--space-xl) 1fr var(--space-xl);
+  grid-template-rows: 1fr auto auto auto var(--space-xl);
+  row-gap: var(--space-s);
+  border-radius: 1rem;
+  overflow: hidden;
+  color: white;
+}
+
+.recipe-hero {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Dark gradient so the text on the image is readable */
+.recipe-header::after {
+  content: "";
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  background: linear-gradient(transparent 35%, rgb(0 0 0 / 0.75));
+}
+
+.recipe-title,
+.recipe-intro,
+.recipe-facts {
+  grid-column: 2;
+  z-index: 1;
+}
+
+.recipe-title {
+  grid-row: 2;
+  font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
+}
+
+.recipe-intro {
+  grid-row: 3;
+}
+
+/* Facts */
+.recipe-facts {
+  grid-row: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-s) var(--space-xl);
+}
+
+.recipe-fact dt {
+  font-size: 0.875rem;
+}
+
+.recipe-fact-value {
+  font-weight: 700;
+}
+
+.recipe-ratings {
+  margin-inline-start: auto;
+}
+
+.recipe-stars {
+  color: #ffd500;
+  font-size: 1.5em;
+}
+
+/* Sections (cards) */
+.recipe-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+}
+
+/* Lists */
+.recipe-list[data-variant="ingredients"] input {
+  accent-color: var(--color-accent);
+}
+
+.recipe-list[data-variant="ingredients"] label {
+  cursor: pointer;
+}
+
+.recipe-list[data-variant="ingredients"] label:hover {
+  color: var(--color-accent);
+}
+
+.recipe-list[data-variant="ingredients"] li:has(:checked) {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.recipe-list[data-variant="steps"] {
+  padding-inline-start: 1.375rem;
+}
+
+.recipe-step {
+  padding-inline-start: 0.375rem;
+}
+
+/* Gallery */
+.recipe-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-m);
+}
+
+.recipe-gallery-image {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.recipe-caption {
+  padding-block-start: var(--space-s);
+  font-weight: 700;
+}
+
+/* ==========================================================
+   7. Site footer
+   ========================================================== */
+
+.site-footer {
+  display: grid;
+  gap: var(--space-xl);
+  max-inline-size: 70rem;
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-m);
+  background-color: var(--color-footer);
+}
+
+@media (width >= 48em) {
+  .site-footer {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand     nav"
+      "copyright copyright";
   }
+
+  .footer-brand {
+    grid-area: brand;
+  }
+
+  .footer-nav {
+    grid-area: nav;
+  }
+
+  .footer-copyright {
+    grid-area: copyright;
+  }
+}
+
+.footer-logo {
+  inline-size: 12.5rem;
+  block-size: auto;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.footer-title {
+  font-size: 1rem;
+}
+
+.footer-copyright {
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+/* ==========================================================
+   8. Utilities
+   Last in the file so they win over component styles.
+   ========================================================== */
+
+/* Skip link: hidden until focused */
+.skip-link {
+  position: absolute;
+  top: var(--space-m);
+  left: var(--space-m);
+  z-index: 100;
+  padding: var(--space-s) var(--space-m);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Hides content visually but keeps it for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
