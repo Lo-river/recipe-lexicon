@@ -11,10 +11,13 @@
   --color-bg: light-dark(#ffffff, #141518);
   --color-surface: light-dark(#f5f5f4, #1d1f23);
   --color-accent: light-dark(#1f5f8b, #7cb8e4);
+  --color-on-accent: light-dark(oklch(100% 0 0), oklch(18% 0.01 50));
   --color-link: light-dark(#1f5f8b, #7cb8e4);
   --color-link-hover: light-dark(#123d5c, #b3d8f2);
-  --color-border: light-dark(#8c0000, #2c2f35);
+  --color-border: light-dark(#7d7e84, #6b6e76);
   --color-footer: rgb(224, 209, 209);
+  --color-error: light-dark(oklch(50% 0.19 28), oklch(75% 0.15 25));
+  --color-success: light-dark(oklch(48% 0.12 150), oklch(78% 0.13 150));
 
   --font-body: "Open Sans", system-ui, sans-serif;
   --font-heading: "Josefin Sans", sans-serif;
@@ -151,11 +154,6 @@ main {
   padding: var(--space-m);
 }
 
-.home {
-  display: grid;
-  gap: var(--space-xl);
-}
-
 /* ==========================================================
    5. Site header
    ========================================================== */
@@ -189,40 +187,22 @@ main {
 }
 
 /* ==========================================================
-   6. Recipe page
+   6. Shared components
    ========================================================== */
-
-/* Page grid: one column on mobile, two from 48em */
-.recipe {
-  display: grid;
-  gap: var(--space-m);
+.button {
+  display: inline-block;
+  padding: var(--space-s) var(--space-l);
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-@media (width >= 48em) {
-  .recipe {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    grid-template-areas:
-      "hero        hero"
-      "ingredients steps"
-      "serving     serving";
-    align-items: start;
-  }
-
-  .recipe > .hero {
-    grid-area: hero;
-  }
-
-  .recipe-ingredients {
-    grid-area: ingredients;
-  }
-
-  .recipe-steps {
-    grid-area: steps;
-  }
-
-  .recipe-serving {
-    grid-area: serving;
-  }
+.button:hover {
+  background-color: oklch(from var(--color-accent) calc(l - 0.08) c h);
 }
 
 /* Hero: image and text share the same grid cells */
@@ -244,10 +224,6 @@ main {
   min-block-size: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-}
-
-.home .hero-image {
-  object-position: center 50%;
 }
 
 /* Dark gradient so the text on the image is readable */
@@ -272,6 +248,14 @@ main {
 
 .hero-intro {
   grid-row: 3;
+}
+
+/* ==========================================================
+   7. Start page
+   ========================================================== */
+.home {
+  display: grid;
+  gap: var(--space-xl);
 }
 
 .category-list {
@@ -320,6 +304,42 @@ main {
 .recipe-card-time {
   font-size: 0.875rem;
   color: var(--color-text-muted);
+}
+
+/* ==========================================================
+   8. Recipe page
+   ========================================================== */
+/* Page grid: one column on mobile, two from 48em */
+.recipe {
+  display: grid;
+  gap: var(--space-m);
+}
+
+@media (width >= 48em) {
+  .recipe {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-areas:
+      "hero        hero"
+      "ingredients steps"
+      "serving     serving";
+    align-items: start;
+  }
+
+  .recipe > .hero {
+    grid-area: hero;
+  }
+
+  .recipe-ingredients {
+    grid-area: ingredients;
+  }
+
+  .recipe-steps {
+    grid-area: steps;
+  }
+
+  .recipe-serving {
+    grid-area: serving;
+  }
 }
 
 /* Facts */
@@ -405,9 +425,95 @@ main {
 }
 
 /* ==========================================================
-   7. Site footer
+   9. Share recipe page
    ========================================================== */
+.share {
+  display: grid;
+  gap: var(--space-m);
+  max-inline-size: 40rem;
+}
 
+.share-form {
+  display: grid;
+  gap: var(--space-l);
+  accent-color: var(--color-accent);
+}
+
+.share-form fieldset {
+  display: grid;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l) var(--space-l);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+.share-form legend {
+  padding-inline: var(--space-xs);
+  font-family: var(--font-heading);
+}
+
+.form-field {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+
+  > .form-field {
+    flex: 1 1 10rem;
+  }
+}
+
+.share-form :is(input:not([type="radio"]), select, textarea) {
+  inline-size: 100%;
+  padding: var(--space-s);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background-color: var(--color-bg);
+  color: inherit;
+}
+
+.choice-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s) var(--space-l);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.field-hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.field-error {
+  display: none;
+  font-weight: 700;
+  color: var(--color-error);
+}
+
+.share-form :user-invalid {
+  border: 2px solid var(--color-error);
+}
+
+.share-form :user-valid {
+  border-color: var(--color-success);
+}
+
+.form-field:has(:user-invalid) .field-error {
+  display: block;
+}
+
+/* ==========================================================
+   10. Site footer
+   ========================================================== */
 .site-footer {
   display: grid;
   gap: var(--space-xl);
@@ -460,10 +566,9 @@ main {
 }
 
 /* ==========================================================
-   8. Utilities
+   11. Utilities
    Last in the file so they win over component styles.
    ========================================================== */
-
 /* Skip link: hidden until focused */
 .skip-link {
   position: absolute;
