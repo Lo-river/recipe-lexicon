@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dela recept | Hemlagat</title>
+    <meta
+      name="description"
+      content="Dela ditt bästa vardagsrecept med andra som gillar att laga mat."
+    />
+    <!-- Fonts: Open Sans and Josefin Sans from Google Fonts (SIL Open Font License) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Hoppa till innehållet</a>
+
+    <header class="site-header">
+      <a class="site-logo" href="index.html"
+        ><img
+          src="logotype/logo-hemlagat-transparent.svg"
+          alt="Hemlagat, till startsidan"
+      /></a>
+      <nav aria-label="Huvudmeny">
+        <ul role="list" class="site-nav">
+          <li><a href="index.html">Recept</a></li>
+          <li><a href="#">Om sajten</a></li>
+          <li>
+            <a class="button" href="share-recipe.html" aria-current="page"
+              >Dela recept</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main" class="share">
+      <h1>Dela ditt recept</h1>
+      <p>Har du ett recept alla måste testa?</p>
+      <p>
+        Fält markerade med <span aria-hidden="true">*</span> måste fyllas i.
+      </p>
+
+      <form class="share-form">
+        <fieldset>
+          <legend>Om receptet</legend>
+
+          <div class="form-field">
+            <label for="recipe-name"
+              >Receptets namn <span aria-hidden="true">*</span></label
+            >
+            <input type="text" id="recipe-name" name="recipe-name" required />
+          </div>
+
+          <div class="form-field">
+            <label for="category">Kategori</label>
+            <select name="category" id="category">
+              <option value="">Välj kategori</option>
+              <option value="breakfast">Frukost</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Middag</option>
+              <option value="dessert">Efterrätt</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cooking-time">Tid i minuter</label>
+              <input
+                type="number"
+                id="cooking-time"
+                name="cooking-time"
+                min="1"
+                max="600"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="servings">Antal portioner</label>
+              <input
+                type="number"
+                id="servings"
+                name="servings"
+                min="1"
+                max="50"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Svårighetsgrad</legend>
+          <div class="choice-list">
+            <div class="choice">
+              <input
+                type="radio"
+                id="difficulty-easy"
+                name="difficulty"
+                value="easy"
+              />
+              <label for="difficulty-easy">Lätt</label>
+            </div>
+            <div class="choice">
+              <input
+                type="radio"
+                id="difficulty-medium"
+                name="difficulty"
+                value="medium"
+              />
+              <label for="difficulty-medium">Medel</label>
+            </div>
+            <div class="choice">
+              <input
+                type="radio"
+                id="difficulty-hard"
+                name="difficulty"
+                value="hard"
+              />
+              <label for="difficulty-hard">Svår</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Receptet</legend>
+
+          <div class="form-field">
+            <label for="ingredients"
+              >Ingredienser <span aria-hidden="true">*</span>
+            </label>
+            <p id="ingredients-hint" class="field-hint">
+              En ingrediens per rad.
+            </p>
+            <textarea
+              id="ingredients"
+              name="ingredients"
+              rows="6"
+              aria-describedby="ingredients-hint"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="instructions"
+              >Gör så här <span aria-hidden="true">*</span></label
+            >
+            <p id="instructions-hint" class="field-hint">Ett steg per rad.</p>
+            <textarea
+              id="instructions"
+              name="instructions"
+              rows="8"
+              aria-describedby="instructions-hint"
+              required
+            ></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Om dig</legend>
+          <div class="form-field">
+            <label for="your-name">Ditt namn</label>
+            <input
+              type="text"
+              name="your-name"
+              id="your-name"
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="email">E-post <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required
+            />
+            <p id="email-error" class="field-error">
+              <span aria-hidden="true">✗</span> Ange en giltig e-postadress,
+              till exempel namn@exempel.se
+            </p>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="button">Skicka recept</button>
+      </form>
+    </main>
+
+    <div class="footer-wrapper">
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <a href="index.html"
+            ><img
+              class="footer-logo"
+              src="logotype/logo-hemlagat-transparent-stroke-3.svg"
+              alt="Hemlagat, till startsidan"
+          /></a>
+
+          <p>Enkla vardagsrecept för hela familjen.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Sidfot">
+          <ul role="list">
+            <li><a href="#">Om sajten</a></li>
+          </ul>
+          <h2 class="footer-title">Fler recept</h2>
+          <ul role="list">
+            <li><a href="#">Frukost</a></li>
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Middag</a></li>
+            <li><a href="#">Efterrätt</a></li>
+          </ul>
+        </nav>
+        <p class="footer-copyright">
+          Bilder: Lånade från Lexicons Figma-mockup · © 2026 Lo River Lööf
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
