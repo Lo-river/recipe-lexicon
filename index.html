@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Enkla vardagsrecept för hela familjen, från frukost till fika."
+      content="Enkla vardagsrecept för hela familjen, från frukost till efterrätter."
     />
     <!-- Fonts: Open Sans and Josefin Sans from Google Fonts (SIL Open Font License) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,79 +29,92 @@
       /></a>
       <nav aria-label="Huvudmeny">
         <ul role="list" class="site-nav">
-          <li><a href="index.html">Recept</a></li>
+          <li><a href="index.html" aria-current="page">Recept</a></li>
           <li><a href="#">Om sajten</a></li>
-          <li><a class="button" href="#">Dela recept</a></li>
+          <li><a class="button" href="share-recipe.html">Dela recept</a></li>
         </ul>
       </nav>
     </header>
 
     <main id="main" class="home">
-      <header class="recipe-header">
+      <header class="hero">
         <img
-          src="test-photos/hero-02-index.avif"
-          class="recipe-hero"
-          alt="fyller på med text när jag lagt in ny bild"
-          width="872"
-          height="580"
+          src="images/hero-index.avif"
+          class="hero-image"
+          alt=""
+          width="687"
+          height="1031"
         />
-        <h1 class="recipe-title">Rubrik för receptet</h1>
-        <p class="recipe-intro">Ingress för recept</p>
+        <h1 class="hero-title">Enkla vardagsrecept</h1>
+        <p class="hero-intro">
+          Recept som alla kan laga, från frukost till efterrätter.
+        </p>
       </header>
-      <article class="content">
-        <section class="categories">
-          <nav class="category-list" aria-label="Receptkategorier">
-            <ul role="list" class="test">
-              <li><a href="#">Frukost</a></li>
-              <li><a href="#">Lunch</a></li>
-              <li><a href="#">Middag</a></li>
-              <li><a href="#">Efterrätt</a></li>
-            </ul>
-          </nav>
-        </section>
 
-        <section class="test-container">
-          <section class="recipe-header recipe-section recipe-card">
-            <div class="test-hero">
+      <nav aria-label="Receptkategorier">
+        <ul role="list" class="category-list">
+          <li><a class="category-tag" href="#">Frukost</a></li>
+          <li><a class="category-tag" href="#">Lunch</a></li>
+          <li><a class="category-tag" href="#">Middag</a></li>
+          <li><a class="category-tag" href="#">Efterrätt</a></li>
+        </ul>
+      </nav>
+
+      <section aria-labelledby="recipes-title">
+        <h2 id="recipes-title" class="visually-hidden">Recept</h2>
+        <ul role="list" class="card-grid">
+          <li>
+            <article class="recipe-card">
               <img
-                class="recipe-gallery-image"
-                src="test-photos/recipe-suggestion-03.avif"
-                alt="fyller på med text när jag lagt in ny bild"
-                width="687"
-                height="1032"
+                src="images/homemade-orange-marmalade-index.avif"
+                alt=""
+                class="recipe-card-image"
+                width="1920"
+                height="1920"
                 loading="lazy"
               />
-              <h2 class="test-hero-text">Frukostrecept</h2>
-            </div>
-          </section>
-          <section class="recipe-header recipe-section recipe-card">
-            <div class="test-hero">
+              <h3 class="recipe-card-title">
+                <a href="pancake.html">Hemmagjord marmelad & toast</a>
+              </h3>
+              <p class="recipe-card-time">40 min</p>
+            </article>
+          </li>
+          <li>
+            <article class="recipe-card">
               <img
-                class="recipe-gallery-image"
-                src="test-photos/recipe-suggestion-01.avif"
-                alt="fyller på med text när jag lagt in ny bild"
-                width="687"
-                height="1032"
+                src="images/roasted-vegetable-salad-index.avif"
+                alt=""
+                class="recipe-card-image"
+                width="1920"
+                height="2404"
                 loading="lazy"
               />
-              <h2 class="test-hero-text">Lunchrecept</h2>
-            </div>
-          </section>
-          <section class="recipe-header recipe-section recipe-card">
-            <div class="test-hero">
+              <h3 class="recipe-card-title">
+                <a href="pancake.html">Fräsch bovetesallad med sötpotatis</a>
+              </h3>
+              <p class="recipe-card-time">20 min</p>
+            </article>
+          </li>
+          <li>
+            <article class="recipe-card">
               <img
-                class="recipe-gallery-image"
-                src="test-photos/recipe-suggestion-02.avif"
-                alt="fyller på med text när jag lagt in ny bild"
-                width="687"
-                height="1032"
+                src="images/fresh-strawberry-cheesecake-index.avif"
+                alt=""
+                class="recipe-card-image"
+                width="1200"
+                height="673"
                 loading="lazy"
               />
-              <h2 class="test-hero-text">Dessertrecept</h2>
-            </div>
-          </section>
-        </section>
-      </article>
+              <h3 class="recipe-card-title">
+                <a href="pancake.html"
+                  >Somrig cheesecake med färska jordgubbar</a
+                >
+              </h3>
+              <p class="recipe-card-time">60 min</p>
+            </article>
+          </li>
+        </ul>
+      </section>
     </main>
 
     <div class="footer-wrapper">
@@ -123,9 +136,9 @@
           <h2 class="footer-title">Fler recept</h2>
           <ul role="list">
             <li><a href="#">Frukost</a></li>
+            <li><a href="#">Lunch</a></li>
             <li><a href="#">Middag</a></li>
             <li><a href="#">Efterrätt</a></li>
-            <li><a href="#">Fika</a></li>
           </ul>
         </nav>
         <p class="footer-copyright">
