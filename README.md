@@ -1,4 +1,8 @@
 # Hemlagat
+**Live:** [lo-river.github.io/recipe-lexicon](https://lo-river.github.io/recipe-lexicon/)
+
+Receptsajt byggd med HTML och CSS under Lexicons frontendutbildning,
+vecka 1 till 4. Inget JavaScript.
 
 Receptsajt byggd med HTML och CSS under Lexicons frontendutbildning,
 vecka 1 till 4. Inget JavaScript.
