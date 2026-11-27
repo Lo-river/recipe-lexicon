@@ -30,6 +30,12 @@
   --space-m: 1rem;
   --space-l: 1.5rem;
   --space-xl: 2rem;
+  --space-section: clamp(1.5rem, 1rem + 2vw, 3rem);
+
+  --font-size-s: 0.875rem;
+  --font-size-m: 1.125rem;
+  --font-size-l: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --font-size-xl: clamp(1.75rem, 1rem + 3vw, 3rem);
 }
 
 /* ==========================================================
@@ -166,6 +172,8 @@ main {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-m);
+  max-inline-size: 70rem;
+  margin-inline: auto;
   padding: var(--space-m);
 
   a {
@@ -208,56 +216,83 @@ main {
   background-color: oklch(from var(--color-accent) calc(l - 0.08) c h);
 }
 
-/* Hero: image and text share the same grid cells */
+/* Hero: stacked on mobile, text on the image from 48em */
 .hero {
   display: grid;
-  grid-template-columns: var(--space-xl) 1fr var(--space-xl);
-  grid-template-rows: 1fr auto auto auto var(--space-xl);
-  row-gap: var(--space-s);
-  border-radius: 1rem;
-  overflow: hidden;
-  color: var(--color-on-image);
+  gap: var(--space-s);
 }
 
 .hero-image {
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
   inline-size: 100%;
   block-size: auto;
-  min-block-size: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-}
-
-/* Dark gradient so the text on the image is readable */
-
-.hero::after {
-  content: "";
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
-  background: linear-gradient(
-    transparent 45%,
-    oklch(from var(--color-overlay) l c h / 0.35) 70%,
-    var(--color-overlay)
-  );
-}
-
-.hero-title,
-.hero-intro,
-.recipe-facts {
-  grid-column: 2;
-  z-index: 1;
+  border-radius: 1rem;
 }
 
 .hero-title {
-  grid-row: 2;
-  font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
+  font-size: var(--font-size-xl);
 }
 
 .hero-intro {
-  grid-row: 3;
-  font-size: 1.125rem;
-  text-shadow: 0 1px 3px var(--color-overlay);
+  font-size: var(--font-size-m);
+}
+
+@media (width >= 48em) {
+  .hero {
+    grid-template-columns: var(--space-xl) 1fr var(--space-xl);
+    grid-template-rows: 1fr auto auto auto var(--space-xl);
+    gap: var(--space-s) 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    color: var(--color-on-image);
+  }
+
+  .hero-image {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    min-block-size: 100%;
+    border-radius: 0;
+  }
+
+  /* Dark gradient so the text on the image is readable */
+  .hero::after {
+    content: "";
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    background: linear-gradient(
+      transparent 45%,
+      oklch(from var(--color-overlay) l c h / 0.35) 70%,
+      var(--color-overlay)
+    );
+  }
+
+  .hero-title,
+  .hero-intro,
+  .recipe-facts {
+    grid-column: 2;
+    z-index: 1;
+  }
+
+  .hero-title {
+    grid-row: 2;
+  }
+
+  .hero-intro {
+    grid-row: 3;
+    text-shadow: 0 1px 3px var(--color-overlay);
+  }
+
+  .recipe-facts {
+    grid-row: 4;
+  }
+}
+
+/* Readable line length */
+.hero-intro,
+.recipe-section p,
+.share p {
+  max-inline-size: 65ch;
 }
 
 /* ==========================================================
@@ -265,7 +300,7 @@ main {
    ========================================================== */
 .home {
   display: grid;
-  gap: var(--space-xl);
+  gap: var(--space-section);
 }
 
 .category-list {
@@ -309,11 +344,11 @@ main {
 
 .recipe-card-title {
   margin-block-start: var(--space-s);
-  font-size: 1.25rem;
+  font-size: var(--font-size-l);
 }
 
 .recipe-card-time {
-  font-size: 0.875rem;
+  font-size: var(--font-size-s);
   color: var(--color-text-muted);
 }
 
@@ -323,7 +358,7 @@ main {
 /* Page grid: one column on mobile, two from 48em */
 .recipe {
   display: grid;
-  gap: var(--space-m);
+  gap: var(--space-section);
 }
 
 @media (width >= 48em) {
@@ -355,7 +390,6 @@ main {
 
 /* Facts */
 .recipe-facts {
-  grid-row: 4;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
@@ -363,7 +397,7 @@ main {
 }
 
 .recipe-fact dt {
-  font-size: 0.875rem;
+  font-size: var(--font-size-s);
 }
 
 .recipe-fact-value {
@@ -418,7 +452,7 @@ main {
 /* Gallery */
 .recipe-gallery {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: var(--space-m);
 }
 
@@ -500,7 +534,7 @@ main {
 }
 
 .field-hint {
-  font-size: 0.875rem;
+  font-size: var(--font-size-s);
   color: var(--color-text-muted);
 }
 
@@ -573,7 +607,7 @@ main {
 .footer-copyright {
   padding-block-start: var(--space-m);
   border-block-start: 1px solid var(--color-border);
-  font-size: 0.875rem;
+  font-size: var(--font-size-s);
 }
 
 /* ==========================================================
