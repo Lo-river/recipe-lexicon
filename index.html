@@ -22,11 +22,18 @@
     <a class="skip-link" href="#main">Hoppa till innehållet</a>
 
     <header class="site-header">
-      <a class="site-logo" href="index.html"
-        ><img
-          src="logotype/logo-hemlagat-transparent.svg"
-          alt="Hemlagat, till startsidan"
-      /></a>
+      <a class="site-logo" href="index.html">
+        <picture>
+          <source
+            srcset="logotype/logo-hemlagat-dark-mode.svg"
+            media="(prefers-color-scheme: dark)"
+          />
+          <img
+            src="logotype/logo-hemlagat.svg"
+            alt="Hemlagat, till startsidan"
+          />
+        </picture>
+      </a>
       <nav aria-label="Huvudmeny">
         <ul role="list" class="site-nav">
           <li><a href="index.html" aria-current="page">Recept</a></li>
@@ -117,40 +124,45 @@
       </section>
     </main>
 
-    <div class="footer-wrapper">
-      <footer class="site-footer">
-        <div class="footer-brand">
-          <a href="index.html"
-            ><img
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <a href="index.html">
+          <picture>
+            <source
+              srcset="logotype/logo-hemlagat-outline-dark-mode.svg"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
               class="footer-logo"
-              src="logotype/logo-hemlagat-transparent-stroke-3.svg"
+              src="logotype/logo-hemlagat-outline.svg"
               alt="Hemlagat, till startsidan"
-          /></a>
+            />
+          </picture>
+        </a>
 
-          <p>Enkla vardagsrecept för hela familjen.</p>
+        <p>Enkla vardagsrecept för hela familjen.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Sidfot">
+        <div class="footer-group">
+          <h2 class="footer-title">Hemlagat</h2>
+          <ul role="list">
+            <li><a href="#">Om sajten</a></li>
+            <li><a href="share-recipe.html">Dela recept</a></li>
+          </ul>
         </div>
-        <nav class="footer-nav" aria-label="Sidfot">
-          <div class="footer-group">
-            <h2 class="footer-title">Hemlagat</h2>
-            <ul role="list">
-              <li><a href="#">Om sajten</a></li>
-              <li><a href="share-recipe.html">Dela recept</a></li>
-            </ul>
-          </div>
-          <div class="footer-group">
-            <h2 class="footer-title">Fler recept</h2>
-            <ul role="list">
-              <li><a href="#">Frukost</a></li>
-              <li><a href="#">Lunch</a></li>
-              <li><a href="#">Middag</a></li>
-              <li><a href="#">Efterrätt</a></li>
-            </ul>
-          </div>
-        </nav>
-        <p class="footer-copyright">
-          Bilder: Lånade från Lexicons Figma-mockup · © 2026 Lo River Lööf
-        </p>
-      </footer>
-    </div>
+        <div class="footer-group">
+          <h2 class="footer-title">Fler recept</h2>
+          <ul role="list">
+            <li><a href="#">Frukost</a></li>
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Middag</a></li>
+            <li><a href="#">Efterrätt</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p class="footer-copyright">
+        Bilder: Lexicons Figma-mockup, Foodiesfeed och Unsplash · © 2026 Lo River Lööf
+      </p>
+    </footer>
   </body>
 </html>

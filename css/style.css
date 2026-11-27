@@ -12,10 +12,12 @@
   --color-surface: light-dark(oklch(97% 0.002 106), oklch(24% 0.008 264));
   --color-accent: light-dark(oklch(47% 0.096 243), oklch(76% 0.089 241));
   --color-border: light-dark(oklch(59% 0.009 279), oklch(54% 0.013 269));
-  --color-line: color-mix(in oklch, var(--color-text) 12%, transparent);
-  --color-wordmark: color-mix(in oklch, var(--color-text) 7%, var(--color-surface));
+  --color-line: light-dark(oklch(91% 0.003 106), oklch(32% 0.008 264));
+  --color-wordmark: light-dark(oklch(92% 0.003 106), oklch(28% 0.008 264));
   --color-error: light-dark(oklch(50% 0.19 28), oklch(75% 0.15 25));
   --color-success: light-dark(oklch(48% 0.12 150), oklch(78% 0.13 150));
+  --color-on-image: oklch(100% 0 0);
+  --color-overlay: oklch(0% 0 0 / 0.75);
   --color-star: light-dark(oklch(65% 0.15 75), oklch(88% 0.181 94));
 
   --font-body: "Open Sans", system-ui, sans-serif;
@@ -53,12 +55,6 @@
 
 * {
   margin: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    interpolate-size: allow-keywords;
-  }
 }
 
 body {
@@ -160,6 +156,11 @@ input[type="radio"] {
   accent-color: var(--color-text);
 }
 
+/* Keeps focused elements from hiding under the sticky header */
+html {
+  scroll-padding-top: 6rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -190,8 +191,7 @@ main {
   gap: var(--space-s) var(--space-xl);
   padding: var(--space-m) max(var(--gutter), (100% - var(--page-width)) / 2);
   border-block-end: 1px solid var(--color-line);
-  background-color: color-mix(in oklch, var(--color-bg) 90%, transparent);
-  backdrop-filter: blur(10px);
+  background-color: var(--color-bg);
 }
 
 .site-logo img {
@@ -339,13 +339,62 @@ main {
   display: grid;
 }
 
+/* Start page hero: image and text share the same grid cells */
+.home .hero {
+  grid-template-columns: var(--space-l) 1fr var(--space-l);
+  grid-template-rows: 1fr auto auto var(--space-l);
+  gap: var(--space-s) 0;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  color: var(--color-on-image);
+}
+
+.home .hero-image {
+  order: 0;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  min-block-size: 100%;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 0;
+}
+
+/* Dark gradient so the text on the image is readable */
+.home .hero::after {
+  content: "";
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  background: linear-gradient(
+    transparent 20%,
+    oklch(from var(--color-overlay) l c h / 0.55) 50%,
+    oklch(from var(--color-overlay) l c h / 0.85)
+  );
+}
+
+.home .hero-title,
+.home .hero-intro {
+  grid-column: 2;
+  z-index: 1;
+}
+
+.home .hero-title {
+  grid-row: 2;
+}
+
+.home .hero-intro {
+  grid-row: 3;
+  color: inherit;
+  text-shadow: 0 1px 3px var(--color-overlay);
+}
+
 @media (width >= 48em) {
-  .home .hero-intro {
-    justify-self: end;
+  .home .hero {
+    grid-template-columns: var(--space-section) 1fr var(--space-section);
+    grid-template-rows: 1fr auto auto var(--space-section);
   }
 
   .home .hero-image {
-    aspect-ratio: 21 / 9;
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -378,7 +427,6 @@ main {
 }
 
 .recipe-card {
-  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -389,6 +437,7 @@ main {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-m);
+
 }
 
 /* Time sits above the title, like a small label */
@@ -410,29 +459,8 @@ main {
   text-decoration: none;
 }
 
-/* The whole card is clickable through the title link */
-.recipe-card-title a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.recipe-card:hover .recipe-card-title a {
+.recipe-card-title a:hover {
   text-decoration: underline;
-}
-
-.recipe-card:hover .recipe-card-image {
-  opacity: 0.88;
-}
-
-.recipe-card-title a:focus-visible {
-  outline: none;
-}
-
-.recipe-card:has(a:focus-visible) {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 6px;
-  border-radius: var(--radius-m);
 }
 
 /* ==========================================================
@@ -543,6 +571,10 @@ main {
   cursor: pointer;
 }
 
+.recipe-list[data-variant="ingredients"] label:hover {
+  color: var(--color-accent);
+}
+
 .recipe-list[data-variant="ingredients"] li:has(:checked) {
   color: var(--color-text-muted);
   text-decoration: line-through;
@@ -619,7 +651,7 @@ main {
   margin-block-start: 3rem;
 }
 
-/* A floated legend becomes a normal grid item inside the fieldset */
+/* float stops the legend from sitting on the border */
 .share-form fieldset {
   display: grid;
   gap: var(--space-l);
@@ -733,18 +765,14 @@ main {
 /* ==========================================================
    10. Site footer
    ========================================================== */
-.footer-wrapper {
-  margin-block-start: var(--space-section);
-  overflow: hidden;
-  background-color: var(--color-surface);
-}
-
 .site-footer {
   display: grid;
   gap: 3rem;
-  inline-size: min(100% - 2 * var(--gutter), var(--page-width));
-  margin-inline: auto;
+  margin-block-start: var(--space-section);
   padding-block-start: clamp(3rem, 2rem + 3vw, 4.5rem);
+  padding-inline: max(var(--gutter), (100% - var(--page-width)) / 2);
+  overflow: hidden;
+  background-color: var(--color-surface);
 }
 
 @media (width >= 48em) {
@@ -813,15 +841,12 @@ main {
   color: var(--color-text-muted);
 }
 
-/* Large wordmark cropped by the bottom of the page.
-   The empty text after the slash hides it from screen readers,
-   since the logo already says Hemlagat. */
-.footer-wrapper::after {
+/* Big decorative text, hidden from screen readers */
+.site-footer::after {
   content: "Hemlagat" / "";
-  display: block;
-  inline-size: min(100% - 2 * var(--gutter), var(--page-width));
+  grid-column: 1 / -1;
   block-size: 0.62em;
-  margin: var(--space-l) auto 0;
+  margin-block-start: -1.5rem;
   overflow: hidden;
   font-family: var(--font-heading);
   font-size: clamp(4rem, 1rem + 16vw, 15.5rem);

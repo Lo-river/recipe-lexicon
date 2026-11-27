@@ -22,11 +22,18 @@
     <a class="skip-link" href="#main">Hoppa till innehållet</a>
 
     <header class="site-header">
-      <a class="site-logo" href="index.html"
-        ><img
-          src="logotype/logo-hemlagat-transparent.svg"
-          alt="Hemlagat, till startsidan"
-      /></a>
+      <a class="site-logo" href="index.html">
+        <picture>
+          <source
+            srcset="logotype/logo-hemlagat-dark-mode.svg"
+            media="(prefers-color-scheme: dark)"
+          />
+          <img
+            src="logotype/logo-hemlagat.svg"
+            alt="Hemlagat, till startsidan"
+          />
+        </picture>
+      </a>
       <nav aria-label="Huvudmeny">
         <ul role="list" class="site-nav">
           <li><a href="index.html">Recept</a></li>
@@ -54,7 +61,16 @@
             <label for="recipe-name"
               >Receptets namn <span aria-hidden="true">*</span></label
             >
-            <input type="text" id="recipe-name" name="recipe-name" required />
+            <input
+              type="text"
+              id="recipe-name"
+              name="recipe-name"
+              aria-describedby="recipe-name-error"
+              required
+            />
+            <p id="recipe-name-error" class="field-error">
+              <span aria-hidden="true">✗</span> Skriv receptets namn
+            </p>
           </div>
 
           <div class="form-field">
@@ -77,7 +93,11 @@
                 name="cooking-time"
                 min="1"
                 max="600"
+                aria-describedby="cooking-time-error"
               />
+              <p id="cooking-time-error" class="field-error">
+                <span aria-hidden="true">✗</span> Ange 1 till 600 minuter
+              </p>
             </div>
 
             <div class="form-field">
@@ -88,7 +108,11 @@
                 name="servings"
                 min="1"
                 max="50"
+                aria-describedby="servings-error"
               />
+              <p id="servings-error" class="field-error">
+                <span aria-hidden="true">✗</span> Ange 1 till 50 portioner
+              </p>
             </div>
           </div>
         </fieldset>
@@ -140,9 +164,12 @@
               id="ingredients"
               name="ingredients"
               rows="6"
-              aria-describedby="ingredients-hint"
+              aria-describedby="ingredients-hint ingredients-error"
               required
             ></textarea>
+            <p id="ingredients-error" class="field-error">
+              <span aria-hidden="true">✗</span> Skriv minst en ingrediens
+            </p>
           </div>
 
           <div class="form-field">
@@ -154,9 +181,12 @@
               id="instructions"
               name="instructions"
               rows="8"
-              aria-describedby="instructions-hint"
+              aria-describedby="instructions-hint instructions-error"
               required
             ></textarea>
+            <p id="instructions-error" class="field-error">
+              <span aria-hidden="true">✗</span> Skriv hur man gör
+            </p>
           </div>
         </fieldset>
 
@@ -193,40 +223,45 @@
       </form>
     </main>
 
-    <div class="footer-wrapper">
-      <footer class="site-footer">
-        <div class="footer-brand">
-          <a href="index.html"
-            ><img
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <a href="index.html">
+          <picture>
+            <source
+              srcset="logotype/logo-hemlagat-outline-dark-mode.svg"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
               class="footer-logo"
-              src="logotype/logo-hemlagat-transparent-stroke-3.svg"
+              src="logotype/logo-hemlagat-outline.svg"
               alt="Hemlagat, till startsidan"
-          /></a>
+            />
+          </picture>
+        </a>
 
-          <p>Enkla vardagsrecept för hela familjen.</p>
+        <p>Enkla vardagsrecept för hela familjen.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Sidfot">
+        <div class="footer-group">
+          <h2 class="footer-title">Hemlagat</h2>
+          <ul role="list">
+            <li><a href="#">Om sajten</a></li>
+            <li><a href="share-recipe.html">Dela recept</a></li>
+          </ul>
         </div>
-        <nav class="footer-nav" aria-label="Sidfot">
-          <div class="footer-group">
-            <h2 class="footer-title">Hemlagat</h2>
-            <ul role="list">
-              <li><a href="#">Om sajten</a></li>
-              <li><a href="share-recipe.html">Dela recept</a></li>
-            </ul>
-          </div>
-          <div class="footer-group">
-            <h2 class="footer-title">Fler recept</h2>
-            <ul role="list">
-              <li><a href="#">Frukost</a></li>
-              <li><a href="#">Lunch</a></li>
-              <li><a href="#">Middag</a></li>
-              <li><a href="#">Efterrätt</a></li>
-            </ul>
-          </div>
-        </nav>
-        <p class="footer-copyright">
-          Bilder: Lånade från Lexicons Figma-mockup · © 2026 Lo River Lööf
-        </p>
-      </footer>
-    </div>
+        <div class="footer-group">
+          <h2 class="footer-title">Fler recept</h2>
+          <ul role="list">
+            <li><a href="#">Frukost</a></li>
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Middag</a></li>
+            <li><a href="#">Efterrätt</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p class="footer-copyright">
+        Bilder: Lexicons Figma-mockup, Foodiesfeed och Unsplash · © 2026 Lo River Lööf
+      </p>
+    </footer>
   </body>
 </html>
